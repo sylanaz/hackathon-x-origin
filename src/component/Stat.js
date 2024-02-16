@@ -1,0 +1,70 @@
+import React, { useState, useEffect } from "react";
+import { MdBubbleChart } from "react-icons/md";
+import axios from "axios";
+function Stat() {
+  const [oxygen, setOxygen] = useState(0);
+  const [keyValues, setKeyValues] = useState({});
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get("http://147.185.221.18:34530/data", {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+        // const data = await response.json();
+        setOxygen(response);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
+  const extractValues = () => {
+    const desiredKeys = ["heart_beat", "temperature", "oxygen"]; // Replace with your desired keys
+    const values = {};
+    oxygen.data?.forEach((item) => {
+      desiredKeys.forEach((key) => {
+        values[key] = item[key] || "N/A"; // Handle missing values (optional)
+      });
+    });
+    setKeyValues(values);
+  };
+
+  useEffect(() => {
+    extractValues();
+  }, [oxygen.data]);
+
+  const SpOZone = keyValues.oxygen < 95 ? "ต่ำกว่าเกณฑ์" : "มาตราฐาน";
+
+  // console.log(keyValues.oxygen);
+  // oxygen.data?.forEach((item) => {
+  //   console.log(item.oxygen);
+  // });
+  return (
+    <div className="bg-[#E0B1B1] h-[200px] md:h-[400px] rounded-3xl">
+      <div className="flex font-bold md:text-[40px] mx-[16px] my-[20px]">
+        ปริมาณออกซิเจนในเลือด
+      </div>
+      <div className="flex justify-around items-center  mt-[20px] mx-[20px]">
+        <div>
+          <MdBubbleChart className=" w-[50px] h-[50px] md:w-[150px] md:h-[150px]" />
+          <div>
+            {/* Display specific data properties from step.data */}
+            <p>
+              <strong>Oxygen in Blood:</strong> {keyValues.oxygen} %
+              <br />
+              {/* Add similar lines for other desired properties */}
+            </p>
+          </div>
+        </div>
+        <div className="flex items-center">
+          ค่าออกซิเจนในเลือด อยู่ในเกณฑ์ {SpOZone}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export default Stat;
