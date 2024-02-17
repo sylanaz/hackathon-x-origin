@@ -64,10 +64,10 @@ function Home() {
     extractValues();
   }, [date.data]);
 
-  console.log(keyValues.create_at);
-  date.data?.forEach((item) => {
-    console.log(item.create_at);
-  });
+  // console.log(keyValues.create_at);
+  // date.data?.forEach((item) => {
+  //   console.log(item.create_at);
+  // });
 
   const datetimeSplit = keyValues.create_at?.split(" ", 2);
 

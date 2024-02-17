@@ -80,18 +80,22 @@ function ChartHeat() {
       }, 5000);
     }
   }, [heattemp.data]);
-  //   data: [heattemp.data?.[heattemp.data.length - 1]?.temperature],
-  //   [heattemp.data?.[heattemp.data.length - 1]
-  console.log(heattemp.data?.[heattemp.data.length - 1]);
-  const allLabels = heattemp.data?.map((item) => item.create_at);
+  if (heattemp && heattemp.data) {
+    console.log(heattemp.data.length);
+    console.log(heattemp.data);
+  } else {
+    console.error("heattemp.data is undefined or null");
+  }
+
+  const allLabels = heattemp?.data?.map((item) => item.create_at);
   const latestLabels = allLabels?.slice(-10);
+
   const data = {
-    labels: latestLabels,
-    // labels: heattemp.data?.map((item) => item.create_at),
+    labels: heattemp?.data?.map((item) => item.create_at),
     datasets: [
       {
         label: "อุณหภูมิ",
-        data: heattemp.data?.map((item) => item.temperature),
+        data: heattemp?.data?.map((item) => item.temperature),
         backgroundColor: "rgba(75,192,192,0.2)",
         borderColor: "rgba(75,192,192,1)",
       },
@@ -106,7 +110,7 @@ function ChartHeat() {
           font: { size: 14 },
         },
         min: 0,
-        max: 10,
+        max: heattemp?.data?.length || 0,
       },
       y: {
         type: "linear",
@@ -130,15 +134,36 @@ function ChartHeat() {
         display: true,
         text: "อุณหภูมิร่างกาย",
         font: {
-          size: 40,
+          size: 20,
         },
       },
     },
   };
 
+  const average =
+    heattemp.data?.reduce((acc, curr) => acc + curr.temperature, 0) /
+    heattemp.data?.length;
+
   return (
-    <div className="relative mx-auto min-h-[150vh] m-0">
+    // "relative mx-auto min-h-[180vh] m-0  "
+    // {`${!checkSubmitBTN() ? "bg-emerald-400 hover:bg-emerald-300" : "bg-gray-400"} text-cyan-950 mt-5 rounded-full duration-300 w-60 p-2 font-semibold`}
+    <div
+      className={`${
+        average > 40 ? "bg-red-600" : "bg-white"
+      } relative mx-auto min-h-[180vh] m-0`}
+    >
       <Navbar />
+      <div className="mb-10 mt-5">
+        <div className="text-xl">
+          อุณหภูมิร่างกายเฉลี่ยของคุณคือ {average.toFixed(2)}
+        </div>
+        <div className="text-2xl">
+          {average > 40
+            ? "คุณมีโอกาสเกิดโรค heatstroke"
+            : "อุณหภูมิร่างกายของคุณอยู่ในระดับปกติ"}
+        </div>
+      </div>
+
       <Line data={data} options={options} />
       <Footer />
     </div>

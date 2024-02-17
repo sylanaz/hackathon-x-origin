@@ -73,9 +73,9 @@ function Heartrate({ gender, age }) {
           <div className="flex flex-col items-center md:text-xl ">
             <div>
               อุณหภูมิร่างกายของคุณอยู่ในเกณฑ์{" "}
-              {keyValues.temperature > 38 ? "สูง" : "ปกติ"}
+              {keyValues.temperature > 40 ? "สูง" : "ปกติ"}
             </div>
-            <div>คุณกำลังอยู่ใน Zone {heartrate > 38 ? "สูง" : "ต่ำ"}</div>
+            {/* <div>คุณกำลังอยู่ใน Zone {heartrate > 38 ? "สูง" : "ต่ำ"}</div> */}
           </div>
           {/* <div>อุณหภูมิร่างกายปัจจุบัน {temperature} เซลเซียส</div> */}
         </div>

@@ -8,7 +8,6 @@ export const Login = () => {
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
 
-
   const toShow = () => {
     setshow(!show);
   };
@@ -30,14 +29,13 @@ export const Login = () => {
       return;
     }
   };
-  
 
   const submit = async () => {
     axios
       .post("http://147.185.221.18:34530/login", {
         identifier: email,
         password: getpassword,
-      },)
+      })
       .then((res) => {
         if (res.status === 200) {
           console.log(res.data["token"]);
@@ -51,11 +49,11 @@ export const Login = () => {
 
   return (
     <section className="bg-gray-50 min-h-screen flex flex-col items-center justify-center ">
-      <div className="bg-[#E35757] flex rounded-2xl shadow-lg max-w-3xl p-5 md:mx-10 items-center mb-8">
+      <div className="bg-white flex rounded-2xl shadow-lg max-w-3xl p-5 md:mx-10 items-center mb-8">
         {/* form */}
         <div className="md:w-1/2 px-8 md:px-16">
-          <h2 className="font-bold text-2xl text-center text-white">
-            สำหรับ<span className="text-black">ผู้สมัครงาน</span>
+          <h2 className="font-bold text-2xl text-center text-black">
+            เข้าสู่<span className="text-[#935858]">ระบบ</span>
           </h2>
           <form action="" className="flex flex-col gap-4" onSubmit={onFinish}>
             <input
@@ -114,16 +112,16 @@ export const Login = () => {
               <div className="flex justify-end -mt-3 text-xs text-yellow-500 mb-3 font-semibold cursor-pointer">ลืมรหัสผ่าน?</div>
             </Link> */}
             <button
-              className="bg-white rounded-full text-xl text-orange-500 py-2 hover:scale-105 duration-300"
+              className="bg-[#935858] rounded-full text-xl text-white py-2 hover:scale-105 duration-300"
               type="submit"
               onClick={submit}
             >
               เข้าสู่ระบบ
             </button>
-            <div className="flex justify-center">
+            <div className="flex justify-center ">
               ยังไม่มีบัญชี ?{" "}
               <div>
-                <span className="mx-2 text-white text-center">
+                <span className="mx-2 text-[#935858] text-center ">
                   <a href="/register">สมัครเลย !</a>
                 </span>
               </div>{" "}
@@ -133,10 +131,7 @@ export const Login = () => {
         {/* image something */}
         <div className="md:block hidden w-1/2 p-5 rounded-2xl bg-gray-100">
           {" "}
-          <img
-            className=" rounded-full mx-auto"
-            src={empl}
-          ></img>
+          <img className=" rounded-full mx-auto" src={empl}></img>
         </div>
       </div>
       <div className="hover:scale-105 duration-300 mt-8"></div>
