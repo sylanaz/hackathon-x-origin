@@ -50,16 +50,12 @@ function Stat() {
       <div className="flex justify-around items-center  mt-[20px] mx-[20px]">
         <div>
           <MdBubbleChart className=" w-[50px] h-[50px] md:w-[150px] md:h-[150px]" />
-          <div>
+          <div className="md:text-2xl">
             {/* Display specific data properties from step.data */}
-            <p>
-              <strong>Oxygen in Blood:</strong> {keyValues.oxygen} %
-              <br />
-              {/* Add similar lines for other desired properties */}
-            </p>
+            Oxygen in Blood: {keyValues.oxygen} %
           </div>
         </div>
-        <div className="flex items-center">
+        <div className="flex items-center md:text-2xl">
           ค่าออกซิเจนในเลือด อยู่ในเกณฑ์ {SpOZone}
         </div>
       </div>

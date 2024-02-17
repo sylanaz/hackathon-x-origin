@@ -7,11 +7,11 @@ function Navbar() {
   return (
     <div className="Navbar flex justify-center md:justify-between relative m-0 pt-10 max-h-fit md:h-[200px] sm:rounded-none md:rounded-bl-[70px] text-white  items-center bg-[#935858] flex-wrap text-lg md:text-lg xl:text-2xl">
       <div className="flex gap-5 mx-5 lg:gap-10 my-6 lg:mx-10 items-center  ">
-        <div className="flex transition duration-300 hover:scale-105 text-4xl font-bold">
+        <div className="flex transition duration-300 hover:scale-105 text-5xl font-bold ml-5">
           MedSoles
         </div>
       </div>
-      <div className="md:flex gap-5 hidden ">
+      <div className="md:flex gap-5 hidden text-3xl">
         <ul className="md:flex gap-5 md:gap-x-20  md:mx-0 mx-auto hidden">
           <li>
             <a href="/" className="hover:text-gray-200">
