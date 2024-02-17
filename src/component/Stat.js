@@ -7,9 +7,11 @@ function Stat() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get("http://147.185.221.18:34530/data", {
+        const response = await axios.get("http://147.185.221.18:34530/authorized/user/data", {
           headers: {
             "Content-Type": "application/json",
+            "Authorization": "Bearer " + localStorage.getItem("token")
+
           },
         });
         // const data = await response.json();
@@ -49,14 +51,16 @@ function Stat() {
       </div>
       <div className="flex justify-around items-center  mt-[20px] mx-[20px]">
         <div>
-          <MdBubbleChart className=" w-[50px] h-[50px] md:w-[150px] md:h-[150px]" />
-          <div className="md:text-2xl">
+          <div className="flex justify-center">
+            <MdBubbleChart className=" w-[50px] h-[50px] md:w-[150px] md:h-[150px]" />
+          </div>
+          <div className="md:text-xl flex justify-center">
             {/* Display specific data properties from step.data */}
             Oxygen in Blood: {keyValues.oxygen} %
           </div>
         </div>
-        <div className="flex items-center md:text-2xl">
-          ค่าออกซิเจนในเลือด อยู่ในเกณฑ์ {SpOZone}
+        <div className="flex items-center md:text-xl">
+          ค่าออกซิเจนในเลือดอยู่ในเกณฑ์ {SpOZone}
         </div>
       </div>
     </div>

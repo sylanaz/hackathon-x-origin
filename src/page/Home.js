@@ -31,11 +31,15 @@ function Home() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get("http://147.185.221.18:34530/data", {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        });
+        const response = await axios.get(
+          "http://147.185.221.18:34530/authorized/user/data",
+          {
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: "Bearer " + localStorage.getItem("token"),
+            },
+          }
+        );
         // const data = await response.json();
         setdate(response);
       } catch (error) {
@@ -72,12 +76,24 @@ function Home() {
   const realTime = datetimeSplit?.[1];
 
   console.log(realDate);
+  let objectDate = new Date();
+
+  const day = objectDate.getDate();
+  console.log(day);
+
+  const month = objectDate.getMonth();
+  console.log(month + 1);
+
+  const year = objectDate.getFullYear();
+  console.log(year);
+
+  const today = year + "-" + (month + 1) + "-" + day;
+  console.log(today === String(datetimeSplit?.[0]));
   return (
-    <div className=" relative mx-auto min-h-[120vh] m-0  ">
+    <div className=" relative mx-auto min-h-[180vh] m-0">
       <Navbar />
       <div className="text-xl md:text-3xl mt-5">
-        ข้อมูลล่าสุดเมื่อวันที่ <span>{realDate}</span> เวลา{" "}
-        {realTime}
+        ข้อมูลล่าสุดเมื่อวันที่ <span>{realDate}</span> เวลา {realTime}
       </div>
       <div className="mx-3 md:mx-20 ">
         <div className="flex justify-center mt-[80px] ">

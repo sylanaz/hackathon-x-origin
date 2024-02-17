@@ -9,17 +9,22 @@ function Heartrate({ gender, age }) {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get("http://147.185.221.18:34530/data", {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        });
+        const response = await axios.get(
+          "http://147.185.221.18:34530/authorized/user/data",
+          {
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: "Bearer " + localStorage.getItem("token"),
+            },
+          }
+        );
         // const data = await response.json();
         setHeartrate(response);
       } catch (error) {
         console.error("Error fetching data:", error);
       }
     };
+    console.log(localStorage.getItem("token"));
 
     fetchData();
   }, []);
@@ -51,22 +56,24 @@ function Heartrate({ gender, age }) {
       <div className="flex  justify-around items-center  mt-[20px] mx-[20px]">
         {/* <div>{heartrate} BPM</div> */}
         <div>
-          <FaHeartPulse className="w-[50px] h-[50px] md:w-[150px] md:h-[150px] " />
-          <div className="flex flex-col items-start md:text-2xl ">
+          <div className="flex justify-center">
+            <FaHeartPulse className="w-[50px] h-[50px] md:w-[150px] md:h-[150px]  " />
+          </div>
+          <div className="flex flex-col  md:text-xl ">
             <div className="flex justify-center">
               Heart Beat: {keyValues.heart_beat}
             </div>
-            <div className="flex">
+            <div className="flex justify-start">
               อุณหภูมิร่างกายปัจจุบัน: {keyValues.temperature}
             </div>
           </div>
         </div>
 
         <div>
-          <div className="flex flex-col items-center md:text-2xl ">
+          <div className="flex flex-col items-center md:text-xl ">
             <div>
               อุณหภูมิร่างกายของคุณอยู่ในเกณฑ์{" "}
-              {temperature > 38 ? "ต่ำ" : "สูง"}
+              {keyValues.temperature > 38 ? "สูง" : "ปกติ"}
             </div>
             <div>คุณกำลังอยู่ใน Zone {heartrate > 38 ? "สูง" : "ต่ำ"}</div>
           </div>

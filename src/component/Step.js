@@ -15,6 +15,7 @@ function Step() {
   const [maxstep, setMaxStep] = useState(10000);
   const [calories, setCalories] = useState(360);
   const [percentages, setPercentages] = useState(35);
+  const [stepCount , setStepCount] = useState(3500)
 
   // useEffect(() => {
   //   const fetchData = async () => {
@@ -54,14 +55,10 @@ function Step() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get("http://147.185.221.18:34530/data", {
+        const response = await axios.get("http://147.185.221.18:34530/authorized/user/data", {
           headers: {
             "Content-Type": "application/json",
-            // 'ngrok-skip-browser-warning' : "1231",
-            // "User-Agent": "PostmanRuntime/7.36.3",
-            // "Accept": "*/*",
-            // "Accept-Encoding": "gzip, deflate, br",
-            // "Connection": "keep-alive",
+            "Authorization": "Bearer " + localStorage.getItem("token")
           },
         });
         // const data = await response.json();
@@ -130,7 +127,7 @@ function Step() {
       <div className="flex md:px-10 justify-evenly items-center ">
         <div>
           <CircularProgressBar percentages={percentages} circleWidth={200} />
-          <input
+          {/* <input
             //wait value from Backend
             type="range"
             min="0"
@@ -138,7 +135,7 @@ function Step() {
             step="1"
             value={percentages}
             onChange={(e) => setPercentages(e.target.value)}
-          />
+          /> */}
         </div>
         <div className="flex flex-col md:text-2xl">
           <div>เป้าหมายของวันนี้</div>
@@ -147,7 +144,7 @@ function Step() {
         </div>
         <div className="flex flex-col md:text-2xl">
           <div>{maxstep}</div>
-          {/* <div></div> */}
+          <div>{stepCount}</div>
           <div>{calories}</div>
         </div>
 

@@ -9,11 +9,11 @@ function Profile() {
   const bmi = weight / (hight / 100) ** 2;
   const dailyStep = 10000;
   return (
-    <div className="relative mx-auto min-h-[120vh] m-0  ">
+    <div className="relative mx-auto min-h-[180vh] m-0  ">
       {" "}
       <Navbar />
       <div className="flex md:justify-center justify-between relative ml-10 mt-5">
-        <div className="flex items-center justify-center absolute right-10 text-center font-bold w-[160px] h-[50px] text-xl rounded-3xl px-2 bg-[#D2BDBD] text-black">
+        <div className="flex items-center justify-center absolute right-10 text-center font-medium w-[160px] h-[50px] text-xl rounded-3xl px-2 bg-[#D2BDBD] text-black">
           แก้ไขข้อมูล
         </div>
         <div className=" w-full rounded-2xl  py-5">
@@ -22,10 +22,10 @@ function Profile() {
             src={chang}
           ></img>
           <div className="flex justify-center text-2xl font-bold ">
-            <FaTrophy className="mt-1 mr-5" />
+            <FaTrophy className="mt-1 mr-2" />
             ทำเป้าหมายบรรลุแล้ว 20 วัน
           </div>
-          <div className="flex items-center justify-center space-x-10 mt-10 font-bold text-xl md:text-4xl">
+          <div className="flex items-center justify-center space-x-10 mt-10 font-medium text-xl md:text-2xl">
             <div className="flex flex-col items-start space-y-5">
               <div>ชื่อ-นามสกุล</div>
               <div>เพศ</div>
